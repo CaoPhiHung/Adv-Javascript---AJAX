@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- saved from url=(0130)https://learn.douglas.bc.ca/bbcswebdav/pid-1125863-dt-content-rid-4248225_1/courses/CSIS-3380-050_23157_201820/preventDefault.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body>
+<form action="https://learn.douglas.bc.ca/bbcswebdav/pid-1125863-dt-content-rid-4248225_1/courses/CSIS-3380-050_23157_201820/preventDefault.html#">
+  <label for="fname">First name: </label>
+  <input id="fname" type="text">
+  <label for="lname">Last name: </label>
+  <input id="lname" type="text">
+  <input id="submit" type="submit">
+  <div></div>
+</form>
+<script>
+  var form = document.querySelector('form');
+  var fname = document.getElementById('fname');
+  var lname = document.getElementById('lname');
+  var submit = document.getElementById('submit');
+  var message = document.querySelector('div');
+
+  form.addEventListener('submit', function(e) {
+    if (fname.value === '' || lname.value === '') {
+      e.preventDefault();
+      message.innerHTML = 'You need to fill in both names!';
+    }
+  });
+</script>
+
+
+</body></html>
