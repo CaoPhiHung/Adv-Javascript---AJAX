@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- saved from url=(0139)https://learn.douglas.bc.ca/bbcswebdav/pid-1125811-dt-content-rid-4247554_1/courses/CSIS-3380-050_23157_201820/retrieve_img_attributes.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>width/height example</title>
+<script>
+function init() {
+  var arrImages = new Array();
+
+  arrImages[0] = document.getElementById("image1");
+  arrImages[1] = document.getElementById("image2");
+  arrImages[2] = document.getElementById("image3");
+
+  var objOutput = document.getElementById("output");
+  var strHtml = "<ul>";
+
+  for (var i = 0; i < arrImages.length; i++) {
+    strHtml += "<li>image" + (i+1) +
+            ": height=" + arrImages[i].height +
+            ", width=" + arrImages[i].width +
+            "</li>";
+  }
+
+  strHtml += "</ul>";
+
+  objOutput.innerHTML = strHtml;
+}
+</script>
+</head>
+<body onload="init();">
+
+<p>Image 1:
+  <img id="image1" src="./width_height example_files/mozilla-banner.gif" height="20" width="200">
+</p>
+
+<p>Image 2:
+  <img id="image2" src="./width_height example_files/mozilla-banner.gif" height="50" width="500">
+</p>
+
+<p>Image 3:
+  <img id="image3" src="./width_height example_files/mozilla-banner.gif" height="80" width="800">
+</p>
+
+<div id="output">
+  
+</div>
+
+
+</body></html>
