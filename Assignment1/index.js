@@ -3,7 +3,7 @@ var dealBtn = document.getElementById('dealBtn');
 var resultBtn = document.getElementById('resultBtn');
 var scoreBtn = document.getElementById('scoreBtn');
 
-//declare html element
+//declare html elements
 var result = document.getElementById('result');
 var Computercards = document.getElementById('Computercards');
 var Playercards = document.getElementById('Playercards');
@@ -14,23 +14,25 @@ var playerPoint = 0;
 var computerWin = 0;
 var playerWin = 0;
 var totalGame = 0;
-
 var playerHand, computerHand = new Array();
 
+//deal button
 function deal(){
+  //reset display
   resetDisplay();
   var cards = initCards();
   shuffle(cards);
-  // console.log("Deal for player 1");
+  // deal for player
   playerHand = drawCards(cards);
-  // console.log(playerHand);
-  // console.log("Deal for computer");
+  // deal for computer
   computerHand = drawCards(cards);
-  console.log(computerHand);
-  result.innerHTML += '<br /> <b>Cards are dealt</b>'; 
+  //print the message
+  result.innerHTML += '<br /> <b>Cards are dealt</b>';
+  //increase number of games 
   totalGame++;
 }
 
+//show button
 function show(){
   resetDisplay();
   showCards();
@@ -42,9 +44,7 @@ function showCards(){
   Computercards.innerHTML = "<br/> <strong> Computer Hand </strong> : <br/> <ul>";
   for(var i = 0; i < computerHand.length; i++){
     Computercards.innerHTML += '<li> Weight: ' + computerHand[i].weight + ' - Suit: ' + computerHand[i].suit + '</li>';
-    console.log(computerPoint);
     computerPoint +=  computerHand[i].weight;
-
   }
   Computercards.innerHTML += '</ul>';
 
@@ -56,33 +56,37 @@ function showCards(){
   }
   Playercards.innerHTML += '</ul>';
 
-  
 }
 
 function showResult(){
+  //show result
   result.innerHTML = '<br/><b> Player 1 Point: ' + playerPoint + '</b><br/>' 
                     + '<b> Computer Point: '+ computerPoint+ '</b>';
 
+  //calculate winner
   if(computerPoint >= playerPoint){
     result.innerHTML += '<br /> <b>Result: Computer Win</b>'; 
-    computerWin += (computerWin + playerWin) < totalGame ? 1 : 0;
+    computerWin += (computerWin + playerWin) < totalGame ? 1 : 0; // increase total win of computer
   }else{
     result.innerHTML += '<br /> <b>Result: Player Win</b>';
-    playerWin += (computerWin + playerWin) < totalGame ? 1 : 0; 
+    playerWin += (computerWin + playerWin) < totalGame ? 1 : 0; // increase total win of player
   }
 }
 
+//score button
 function score(){
   resetDisplay();
   result.innerHTML ='<br/><b>Total Game: ' + totalGame + '</b>'
-                    + '<br/><b>Player Win ' + playerWin + ' - Computer Win: ' + computerWin + '</b>';
+                    + '<br/><b>Player Win: ' + playerWin + ' - Computer Win: ' + computerWin + '</b>';
 }
 
+//create card deck
 function initCards(){
   var cards = new Array();
-  for(var suit =0; suit< 4; suit++){
-    for(var weight = 2; weight < 15; weight++){
-      var card_suit = '';
+  //create array card object with suit and weight propertises
+  for(var suit =0; suit< 4; suit++){ // 4 suits
+    for(var weight = 2; weight < 15; weight++){ // 13 cards each suit
+      var card_suit = ''; 
       switch(suit){
         case 1:
         card_suit = 'Hearts';
@@ -103,18 +107,24 @@ function initCards(){
   return cards;
 }
 
+//draw cards
 function drawCards(array){
   var cards = new Array(); 
+  //draw top three cards
   for(var i = 0 ; i < 3; i++){
     cards.push(array.shift());
   }
+  //return as an array
   return cards;
 }
 
+//reset function
 function resetDisplay(){
+  //reset html dom
   Playercards.innerHTML ='';
   Computercards.innerHTML ='';
   result.innerHTML ='';
+  //reset player point for each game
   playerPoint = 0;
   computerPoint = 0;
 } 
