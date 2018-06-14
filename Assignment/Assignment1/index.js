@@ -3,11 +3,13 @@ var dealBtn = document.getElementById('dealBtn');
 var resultBtn = document.getElementById('resultBtn');
 var scoreBtn = document.getElementById('scoreBtn');
 
+
+
 //declare html elements
 var result = document.getElementById('result');
 var Computercards = document.getElementById('Computercards');
 var Playercards = document.getElementById('Playercards');
-
+// dealBtn.addEventListener('click', deal);
 //declare variables
 var computerPoint = 0; 
 var playerPoint = 0;
