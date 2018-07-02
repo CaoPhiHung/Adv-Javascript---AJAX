@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- saved from url=(0132)https://learn.douglas.bc.ca/bbcswebdav/pid-1136825-dt-content-rid-4309319_1/courses/CSIS-3380-050_23157_201820/lab6-jobs%281%29.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+</head>
+<body>
+<select id="job">
+  <option value="none" selected="selected">- make your choice -</option>
+  <option value="javascript">javascript</option>
+  <option value="python">python</option>
+  <option value="ruby">ruby</option>
+</select>
+<div id="container">
+  <div id="title"></div>
+  <div id="location"></div>
+  <div id="description"></div>
+</div>
+<script src="./lab6-jobs(1)_files/jquery.js.download"></script>
+<script>
+  var getJob = function(selectedJob) {
+    $.ajax({
+      url: 'http://localhost:3000?job='+selectedJob,
+      type: 'GET',
+      dataType: 'json',
+      success: function(response){
+        if(response.length){
+          var title = response[0].title;
+          var location = response[0].location;
+          var description = response[0].description;
+
+          $('#title').text(title);
+          $('#location').text(location);
+          $('#description').html(description);
+        }
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  };
+
+  $(document).ready(function() {
+    $("#job").change(function(event) {
+      var selectedJob = $("#job").val();
+      $('#title').empty();
+      $('#location').empty();
+      $('#description').empty();
+      if(selectedJob!=='none') {
+        getJob(selectedJob);
+      }
+    });
+  });
+</script>
+
+
+</body></html>

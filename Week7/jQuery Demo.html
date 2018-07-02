@@ -1,0 +1,60 @@
+
+<!-- saved from url=(0121)https://learn.douglas.bc.ca/bbcswebdav/pid-1136825-dt-content-rid-4309321_1/courses/CSIS-3380-050_23157_201820/labs7.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>jQuery Demo</title>
+    <style>
+      span {
+        font-weight: bold;
+      }
+    </style>
+    <script src="./jQuery Demo_files/jquery.js.download"></script>
+    <script src="./jQuery Demo_files/mustache.js.download"></script>
+  </head>
+
+  <body>
+    <div id="people">
+      <ul>
+        <li><span>Name:</span> patricia black, <span>Email:</span> patricia.black@example.com</li>
+      
+        <li><span>Name:</span> emily clark, <span>Email:</span> emily.clark@example.com</li>
+      
+        <li><span>Name:</span> jacob sørensen, <span>Email:</span> jacob.sørensen@example.com</li>
+      
+        <li><span>Name:</span> matilda jokinen, <span>Email:</span> matilda.jokinen@example.com</li>
+      
+        <li><span>Name:</span> bruna mercier, <span>Email:</span> bruna.mercier@example.com</li>
+      
+        <li><span>Name:</span> &#1585;&#1608;&#1606;&#1740;&#1705;&#1575; &#1606;&#1580;&#1575;&#1578;&#1740;, <span>Email:</span> &#1585;&#1608;&#1606;&#1740;&#1705;&#1575;.&#1606;&#1580;&#1575;&#1578;&#1740;@example.com</li>
+      
+        <li><span>Name:</span> marc hawkins, <span>Email:</span> marc.hawkins@example.com</li>
+      
+        <li><span>Name:</span> nina alvarez, <span>Email:</span> nina.alvarez@example.com</li>
+      
+        <li><span>Name:</span> silke petersen, <span>Email:</span> silke.petersen@example.com</li>
+      
+        <li><span>Name:</span> marcus møller, <span>Email:</span> marcus.møller@example.com</li>
+      </ul>
+    </div>
+    <script id="personTemplate" type="text/template">
+      <ul>{{#results}}
+        <li><span>Name:</span> {{name.first}} {{name.last}}, <span>Email:</span> {{email}}</li>
+      {{/results}}</ul>
+    </script>
+
+    <script>
+    $(document).ready(function() {
+      $.ajax({
+        type: 'GET',
+        url: 'https://randomuser.me/api/?results=10',
+        dataType: 'json',
+        success: function(data) {
+          var template = $('#personTemplate').html();
+          var html = Mustache.to_html(template, data);
+          $('#people').html(html);
+        }
+      });
+    });
+    </script>
+
+
+</body></html>
