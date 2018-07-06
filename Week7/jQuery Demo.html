@@ -1,5 +1,5 @@
 
-<!-- saved from url=(0121)https://learn.douglas.bc.ca/bbcswebdav/pid-1136825-dt-content-rid-4309321_1/courses/CSIS-3380-050_23157_201820/labs7.html -->
+<!-- saved from url=(0035)file:///E:/Week7/jQuery%20Demo.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
     <title>jQuery Demo</title>
     <style>
@@ -7,33 +7,33 @@
         font-weight: bold;
       }
     </style>
-    <script src="./jQuery Demo_files/jquery.js.download"></script>
-    <script src="./jQuery Demo_files/mustache.js.download"></script>
+    <script src="file:///E:/Week7/jquery.js"></script>
+    <script src="file:///E:/Week7/mustache.js"></script>
   </head>
 
   <body>
     <div id="people">
-      <ul>
-        <li><span>Name:</span> patricia black, <span>Email:</span> patricia.black@example.com</li>
+      <!-- <ul>
+        <li><span>Name:</span> leonard bowman, <span>Email:</span> leonard.bowman@example.com</li>
       
-        <li><span>Name:</span> emily clark, <span>Email:</span> emily.clark@example.com</li>
+        <li><span>Name:</span> batur kasapo&#287;lu, <span>Email:</span> batur.kasapo&#287;lu@example.com</li>
       
-        <li><span>Name:</span> jacob sørensen, <span>Email:</span> jacob.sørensen@example.com</li>
+        <li><span>Name:</span> warren obrien, <span>Email:</span> warren.obrien@example.com</li>
       
-        <li><span>Name:</span> matilda jokinen, <span>Email:</span> matilda.jokinen@example.com</li>
+        <li><span>Name:</span> arthur robinson, <span>Email:</span> arthur.robinson@example.com</li>
       
-        <li><span>Name:</span> bruna mercier, <span>Email:</span> bruna.mercier@example.com</li>
+        <li><span>Name:</span> joshua campbell, <span>Email:</span> joshua.campbell@example.com</li>
       
-        <li><span>Name:</span> &#1585;&#1608;&#1606;&#1740;&#1705;&#1575; &#1606;&#1580;&#1575;&#1578;&#1740;, <span>Email:</span> &#1585;&#1608;&#1606;&#1740;&#1705;&#1575;.&#1606;&#1580;&#1575;&#1578;&#1740;@example.com</li>
+        <li><span>Name:</span> katrine poulsen, <span>Email:</span> katrine.poulsen@example.com</li>
       
-        <li><span>Name:</span> marc hawkins, <span>Email:</span> marc.hawkins@example.com</li>
+        <li><span>Name:</span> toby brown, <span>Email:</span> toby.brown@example.com</li>
       
-        <li><span>Name:</span> nina alvarez, <span>Email:</span> nina.alvarez@example.com</li>
+        <li><span>Name:</span> vicenta castro, <span>Email:</span> vicenta.castro@example.com</li>
       
-        <li><span>Name:</span> silke petersen, <span>Email:</span> silke.petersen@example.com</li>
+        <li><span>Name:</span> sven barbier, <span>Email:</span> sven.barbier@example.com</li>
       
-        <li><span>Name:</span> marcus møller, <span>Email:</span> marcus.møller@example.com</li>
-      </ul>
+        <li><span>Name:</span> asl&#305; van den ouden, <span>Email:</span> asl&#305;.vandenouden@example.com</li>
+      </ul> -->
     </div>
     <script id="personTemplate" type="text/template">
       <ul>{{#results}}
@@ -50,6 +50,7 @@
         success: function(data) {
           var template = $('#personTemplate').html();
           var html = Mustache.to_html(template, data);
+          console.log(data);
           $('#people').html(html);
         }
       });
