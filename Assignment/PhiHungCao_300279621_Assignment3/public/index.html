@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Assignment 3</title>
+  
+</head>
+<body>
+<div>
+
+    <select id="cuisine">
+      <option value="italian">italian</option>
+      <option value="mexican">mexican</option>
+      <option value="chinese">chinese</option>
+      <option value="japanese">japanese</option>
+    </select>
+    <br/><br/>
+    <select id="sortBy">
+        <option value="best_match">Best Match</option>
+        <option value="Rating">Rating</option>
+        <option value="review_count">Review Count</option>
+      </select>
+      <br/><br/>
+      <select id="priceFilter">
+        <option value="1">Inexpensive</option>
+        <option value="2">Moderate</option>
+        <option value="3">Pricey</option>
+        <option value="4">Ultra High-End</option>
+      </select>
+      <br/><br/>
+      <button id="btnSubmit" type="submit" value="Submit">Submit</button>
+
+</div>
+<div id="container">
+  <ul id="restaurants"></ul>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+  var ids = [];
+  var open = false;
+  var selectedId = "";
+  var getReview = function(id) {
+      if(selectedId != id){
+        open =false;
+      }
+      selectedId =id;
+      if(!open){
+        open = true;
+        $('#review' + id).toggle(open);
+        for(var i = 0; i < ids.length; i++){
+            if(ids[i] != id){
+              $('#review' + ids[i]).empty();
+            }
+        }
+      }else{
+        open = false;
+        $('#review' + id).toggle(open);
+        
+      }
+      $.ajax({
+        url: 'http://localhost:3000/reviews/?id='+id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response){
+          if(response.reviews.length) {
+            $('#review' + id).empty();
+            response.reviews.forEach(function(res) {
+              $('#review' + id).append('<li><ol>Review: '+res.text
+                  + '</ol></li><br>');
+            });
+            
+        } else {
+            $('#review' + id).html('No result found');
+          }
+        },
+        error: function(err) {
+          console.error(err);
+        }
+      });
+
+  }
+
+$(document).ready(function() {
+
+  $("#btnSubmit").click(function(){
+    var cuisine = $("#cuisine").val();
+    var sortBy = $("#sortBy").val();
+    var priceFilter = $("#priceFilter").val();
+    $.ajax({
+      url: 'http://localhost:3000/restaurants?cuisine='+cuisine+'&sortBy=' + sortBy + '&priceFilter=' + priceFilter,
+      type: 'GET',
+      dataType: 'json',
+      success: function(response){
+        if(response.businesses.length) {
+          $('#restaurants').empty();
+          response.businesses.forEach(function(res) {
+            $('#restaurants').append('<li><ol>Name: '+res.name
+                +'</ol><ol>Price: ' + res.price 
+                +'</ol><ol>Rating: ' + res.rating  
+                + '</ol><ol><a id="review" class="toggle" href="#" onclick="getReview(\''+res.id+'\')"> see review</a>'
+                + '<div><ul id="review' + res.id + '"  style="display: block"></ul></div>'   
+                + '</ol></li><br>');
+                ids.push(res.id);
+          });
+          
+        } else {
+          $('#restaurants').html('No result found');
+        }
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    });
+
+
+
+  }); 
+});
+</script>
+</body>
+</html>
