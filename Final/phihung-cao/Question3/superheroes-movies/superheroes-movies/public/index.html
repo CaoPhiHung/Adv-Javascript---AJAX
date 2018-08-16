@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+<select id="movie_selection">
+  <option value="none" selected="selected">- make your choice -</option>
+  <option value="Ant-Man and the Wasp">Ant-Man and the Wasp</option>
+  <option value="The Dark Knight Rises">The Dark Knight Rises</option>
+  <option value="X-Men Origins: Wolverine">X-Men Origins: Wolverine</option>
+</select>
+<div id="container">
+  <div>Title: <span id="title"><!-- Insert the movie title here --></span></div>
+  <div>Description: <span id="description"><!-- Insert the movie description here --></span></div>
+  <div>Genre: <span id="genre"><!-- Insert the movie genre here --></span></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+  // perform an AJAX call on page load to GET /superhero/movies
+  var getMovie = function(movie) {
+    $.ajax({
+      url: 'http://localhost:3000/superhero/movies?movie='+movie,
+      type: 'GET',
+      dataType: 'json',
+      success: function(response){
+        if(response) {
+          $('#title').html(response.trackName);
+          $('#description').html(response.longDescription);
+          $('#genre').html(response.primaryGenreName);
+        } else {
+          $('#title').html('No result found');
+          $('#description').html('No result found');
+          $('#genre').html('No result found');
+        }
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    });
+  };
+
+  $(document).ready(function() {
+    $("#movie_selection").change(function(event) {
+      var movie = $("#movie_selection").val();
+      if(movie!=='none') {
+        getMovie(movie);
+      }
+    });
+  });
+</script>
+</body>
+</html>

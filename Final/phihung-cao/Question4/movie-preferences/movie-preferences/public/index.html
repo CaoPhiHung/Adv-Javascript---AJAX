@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="container">
+  <div><strong>Movie ID:</strong> <span id="movie_id"><!-- Insert the movie ID here --></span></div>
+  <div><strong>Title:</strong> <span id="title"><!-- Insert the movie title here --></span></div>
+  <div><strong>Overview:</strong> <span id="overview"><!-- Insert the movie overview here --></span></div>
+  <p><a id="like" href="#">Like</a> | <a id="dislike" href="#">Dislike</a></p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+  $(document).ready(function() {
+    var getMovie = function() {
+      // AJAX call to GET /random_movie
+      $.ajax({
+      url: 'http://localhost:3000/random_movie',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response){
+        if(response) {
+
+          $('#movie_id').html(response.movie_id);
+          $('#title').html(response.title);
+          $('#overview').html(response.overview);
+
+        } else {
+        }
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    });
+    };
+
+    var postMoviePreference = function(event) {
+      // AJAX call to POST /movie_preference
+      var movie = { movie_id: $('#movie_id').html(),
+                    preference: event.currentTarget.id};
+
+      $.ajax({
+      url: 'http://localhost:3000/movie_preference',
+      type: 'POST',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(movie) ,
+      success: function(response){
+        if(response) {
+          getMovie();
+        }
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    });
+    };
+
+    $('#like').on('click', postMoviePreference);
+    $('#dislike').on('click', postMoviePreference);
+    getMovie();
+  });
+</script>
+</body>
+</html>
