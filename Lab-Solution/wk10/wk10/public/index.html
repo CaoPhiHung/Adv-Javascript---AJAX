@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div>Price: <input id="price"></div>
+  <div>Postal Code: <input id="postal_code"></div>
+  <div><input id="submitBtn" type="submit" value="Get Tax"></div>
+  <div id="result"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#submitBtn').on('click', function(){
+      var price = $('#price').val();
+      var postal_code = $('#postal_code').val();
+      var url = 'http://localhost:3000/compute_tax?'+'price='+price+'&postal_code='+postal_code;
+
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response){
+          $('#result').text(response.taxPayable);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

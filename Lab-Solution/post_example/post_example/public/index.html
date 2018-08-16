@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+  result: <span id="container"></span>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+  $(document).ready(function() {
+    var user = { id: 1, name: 'Ed Leng' };
+    $.ajax({
+      url: 'http://localhost:3000/users',
+      type: 'POST',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(user),
+      success: function(response){
+        console.log(JSON.stringify(response));
+        $("#container").text(response.id);
+      },
+      error: function(err) {
+        console.error(err.message);
+      }
+    });
+
+  });
+</script>
+</body>
+</html>

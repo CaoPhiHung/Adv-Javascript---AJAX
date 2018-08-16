@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script>
+      $(document).ready(function() {
+        var $expandText = $('#expand-text');
+        $expandText.hide();
+        $('#more').on('click', function() {
+          $expandText.toggle();
+          var $link = $(this);
+          if($link.text() == 'read less') {
+            $link.text('read more');
+          } else {
+            $link.text('read less');
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec velit nulla. Nulla bibendum id tortor eu gravida. Vivamus lacinia libero augue, eu imperdiet eros iaculis sed.</p>
+      <p id="expand-text">Fusce mollis mauris eu felis feugiat pulvinar. Sed lacus orci, viverra vitae nibh eu, pharetra laoreet ante. Proin in auctor mauris. Vestibulum mattis magna sit amet felis tincidunt, sit amet efficitur leo aliquet. Pellentesque tempus ante eget mauris tempus, in lacinia leo finibus. Vivamus eget lacinia magna. Cras lorem ipsum, pellentesque vel justo congue, interdum bibendum ex. Mauris ipsum diam, viverra sit amet bibendum a, aliquet non purus. Ut nisl lorem, placerat nec magna mollis, consequat fermentum nisl. Nam egestas magna vitae lobortis imperdiet. Vestibulum efficitur est vitae urna pulvinar, sit amet interdum justo varius. Vivamus feugiat lacinia nibh, ac rhoncus libero bibendum id.</p>
+      <a href="#" id="more">read more</a>
+      </div>
+    </div>
+  </body>
+</html>
